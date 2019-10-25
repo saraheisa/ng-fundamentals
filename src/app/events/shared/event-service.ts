@@ -1,12 +1,5 @@
 import { Injectable } from '@angular/core';
 
-@Injectable()
-export class EventService {
-    getEvents() {
-        return EVENTS;
-    }
-}
-
 const EVENTS = [
     {
         id: 1,
@@ -317,3 +310,14 @@ const EVENTS = [
         ]
     }
 ];
+
+@Injectable()
+export class EventService {
+    getEvents() {
+        return EVENTS;
+    }
+
+    getEventByID(id: number) {
+        return EVENTS.find(e => e.id === id);
+    }
+}
