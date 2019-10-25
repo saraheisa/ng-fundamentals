@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { EventService } from '../shared/event-service';
 
 @Component({
-    selector: 'event-details',
     templateUrl: 'event-detail.component.html',
     styles: [`.container { padding-left: 20px; padding-right: 20px; }
               .event-image { height: 100px; }`]
