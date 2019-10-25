@@ -34,8 +34,19 @@ import { EventRouteActivatorService } from './events/event-details/event-route-a
   providers: [
     EventService,
     ToastrService,
-    EventRouteActivatorService
+    EventRouteActivatorService,
+    {
+      provide: 'canDeactivateCreateEvent',
+      useValue: isCreateEventDirty
+    }
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function isCreateEventDirty(component: CreateEventComponent) {
+  if (component.isDirty) {
+    return window.confirm('Are you sure you want to leave?');
+  }
+  return true;
+}
