@@ -15,6 +15,7 @@ import { EventService } from './events/shared/event-service';
 import { ToastrService } from './common/toastr.service';
 import { CreateEventComponent } from './events/create-event.component';
 import { EventRouteActivatorService } from './events/event-details/event-route-activator.service';
+import { EventListResolverService } from './events/events-list-resolver.service';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { EventRouteActivatorService } from './events/event-details/event-route-a
     EventService,
     ToastrService,
     EventRouteActivatorService,
+    EventListResolverService,
     {
       provide: 'canDeactivateCreateEvent',
       useValue: isCreateEventDirty
