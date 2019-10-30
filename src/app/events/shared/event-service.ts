@@ -327,4 +327,10 @@ export class EventService {
     getEventByID(id: number): IEvent {
         return EVENTS.find(e => e.id === id);
     }
+
+    addEvent(event) {
+        event.id = 42;
+        event.sessions = [];
+        EVENTS.push(event);
+    }
 }
