@@ -7,7 +7,8 @@ import { IEvent, ISession } from '../shared';
     templateUrl: 'event-detail.component.html',
     styles: [`.container { padding-left: 20px; padding-right: 20px; }
               .event-image { height: 100px; }
-              a { cursor: pointer }`]
+              a { cursor: pointer }
+              .sessionNav { display: flex; justify-content: space-between; margin-bottom: 10px; }`]
 })
 
 export class EventDetailsComponent implements OnInit {
