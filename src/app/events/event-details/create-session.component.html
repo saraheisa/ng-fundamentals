@@ -38,6 +38,7 @@
       <label for="abstract">Abstract:</label>
       <em *ngIf="abstract.invalid && abstract.dirty && abstract.errors.required">Required</em>
       <em *ngIf="abstract.invalid && abstract.dirty && abstract.errors.maxlength">Max Length is 400 characters</em>
+      <em *ngIf="abstract.invalid && abstract.dirty && abstract.errors.restrictedWords">Restricted words found: {{abstract.errors.restrictedWords}}</em>
       <textarea id="abstract" formControlName="abstract" rows=3 class="form-control" placeholder="abstract..."></textarea>
     </div>
     <button type="submit" [disabled] = "newSession.invalid" class="btn btn-primary">Save</button>
