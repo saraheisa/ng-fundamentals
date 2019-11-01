@@ -8,12 +8,14 @@ import { IEvent, ISession } from '../shared';
     styles: [`.container { padding-left: 20px; padding-right: 20px; }
               .event-image { height: 100px; }
               a { cursor: pointer }
-              .sessionNav { display: flex; justify-content: space-between; margin-bottom: 10px; }`]
+              .sessionNav { display: flex; justify-content: space-between; margin-bottom: 10px; }
+              .filterBtns { display: flex; justify-content: space-between; padding: 10px;}`]
 })
 
 export class EventDetailsComponent implements OnInit {
     event: IEvent;
     addMode = false;
+    filterBy = 'all';
 
     constructor( private eventService: EventService,
         private route: ActivatedRoute) {}
