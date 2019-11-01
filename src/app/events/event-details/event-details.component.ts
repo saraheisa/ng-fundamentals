@@ -9,13 +9,14 @@ import { IEvent, ISession } from '../shared';
               .event-image { height: 100px; }
               a { cursor: pointer }
               .sessionNav { display: flex; justify-content: space-between; margin-bottom: 10px; }
-              .filterBtns { display: flex; justify-content: space-between; padding: 10px;}`]
+              .subBtns { display: flex; justify-content: space-between; padding: 10px;}`]
 })
 
 export class EventDetailsComponent implements OnInit {
     event: IEvent;
     addMode = false;
     filterBy = 'all';
+    sortBy = 'votes';
 
     constructor( private eventService: EventService,
         private route: ActivatedRoute) {}
