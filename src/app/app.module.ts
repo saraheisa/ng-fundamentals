@@ -24,9 +24,14 @@ import { Error404Component } from './errors/404.component';
 import { CollapsibleWellComponent } from './common/collapsible-well.component';
 
 import { TOASTR_TOKEN, Toastr } from './common/toastr.service';
+import { SimpleModalComponent } from './common/simple-modal.component';
+import { JQ_TOKEN } from './common/jquery.service';
+
 import { AuthService } from './user/auth.service';
+import { ModalTriggerDirective } from './common/modal-trigger.directive';
 
 const toastr: Toastr = window['toastr'];
+const jQuery = window['$'];
 
 
 @NgModule({
@@ -41,7 +46,9 @@ const toastr: Toastr = window['toastr'];
     CreateSessionComponent,
     SessionListComponent,
     CollapsibleWellComponent,
-    DurationPipe
+    DurationPipe,
+    SimpleModalComponent,
+    ModalTriggerDirective
   ],
   imports: [
     BrowserModule,
@@ -61,6 +68,10 @@ const toastr: Toastr = window['toastr'];
     {
       provide: 'canDeactivateCreateEvent',
       useValue: isCreateEventDirty
+    },
+    {
+      provide: JQ_TOKEN,
+      useValue: jQuery
     }
   ],
   bootstrap: [AppComponent]
