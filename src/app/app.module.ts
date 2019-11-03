@@ -16,7 +16,8 @@ import {
   CreateSessionComponent,
   SessionListComponent,
   DurationPipe,
-  VoteComponent
+  VoteComponent,
+  LocationValidatorDirective
 } from './events/index';
 
 import { AppComponent } from './app.component';
@@ -50,7 +51,8 @@ const jQuery = window['$'];
     DurationPipe,
     SimpleModalComponent,
     ModalTriggerDirective,
-    VoteComponent
+    VoteComponent,
+    LocationValidatorDirective
   ],
   imports: [
     BrowserModule,
