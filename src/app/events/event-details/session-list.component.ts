@@ -1,5 +1,7 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, Inject } from '@angular/core';
 import { ISession } from '../shared';
+import { AuthService } from 'src/app/user/auth.service';
+import { TOASTR_TOKEN, Toastr } from 'src/app/common/toastr.service';
 
 @Component({
     selector: 'session-list',
@@ -11,6 +13,8 @@ export class SessionListComponent implements OnChanges {
     @Input() filterBy: string;
     @Input() sortBy: string;
     visibleSessions: ISession[] = [];
+
+    constructor(private authSerice: AuthService, @Inject(TOASTR_TOKEN) private toastr: Toastr) {}
 
     ngOnChanges() {
         if (this.sessions) {
@@ -26,6 +30,26 @@ export class SessionListComponent implements OnChanges {
             this.visibleSessions = this.sessions.slice(0);
         } else {
             this.visibleSessions = this.sessions.filter(s => s.level.toLocaleLowerCase() === filter);
+        }
+    }
+
+    checkVote(session: ISession) {
+        if (this.authSerice.isAuthenticated()) {
+            return session.voters.includes(this.authSerice.currentUser.userName);
+        }
+        return false;
+    }
+
+    toggleVote(session: ISession) {
+        if (this.authSerice.isAuthenticated()) {
+            const index = session.voters.indexOf(this.authSerice.currentUser.userName);
+            if (index > -1) {
+                session.voters = session.voters.filter(v => v !== this.authSerice.currentUser.userName);
+            } else {
+                session.voters.push(this.authSerice.currentUser.userName);
+            }
+        } else {
+            this.toastr.info('you need to login first', 'Hey You!');
         }
     }
 }
