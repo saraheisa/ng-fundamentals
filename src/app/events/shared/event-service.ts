@@ -1,6 +1,8 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, of } from 'rxjs';
 import { IEvent, ISession } from './event.model';
+import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 
 const EVENTS: IEvent[] = [
     {
@@ -315,13 +317,12 @@ const EVENTS: IEvent[] = [
 
 @Injectable()
 export class EventService {
+
+    constructor(private http: HttpClient) {}
+
     getEvents(): Observable<IEvent[]> {
-        const subject = new Subject<IEvent[]>();
-        setTimeout( () => {
-            subject.next(EVENTS);
-            subject.complete();
-        }, 100);
-        return subject;
+        return this.http.get<IEvent[]>('/api/events')
+        .pipe(catchError(this.handleError<IEvent[]>('get events', [])));
     }
 
     getEventByID(id: number): IEvent {
@@ -356,5 +357,12 @@ export class EventService {
         }, 100);
 
         return req;
+    }
+
+    private handleError<T> (operation='operation', result?: T) {
+        return (error: any): Observable<T> => {
+            console.error(error);
+            return of(result as T);
+        };
     }
 }
