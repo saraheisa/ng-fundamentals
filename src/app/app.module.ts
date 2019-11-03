@@ -12,13 +12,13 @@ import {
   EventDetailsComponent,
   EventService,
   CreateEventComponent,
-  EventRouteActivatorService,
   EventListResolverService,
   CreateSessionComponent,
   SessionListComponent,
   DurationPipe,
   VoteComponent,
-  LocationValidatorDirective
+  LocationValidatorDirective,
+  EventResolverService
 } from './events/index';
 
 import { AppComponent } from './app.component';
@@ -68,9 +68,9 @@ const jQuery = window['$'];
       provide: TOASTR_TOKEN,
       useValue: toastr
     },
-    EventRouteActivatorService,
     EventListResolverService,
     AuthService,
+    EventResolverService,
     {
       provide: 'canDeactivateCreateEvent',
       useValue: isCreateEventDirty

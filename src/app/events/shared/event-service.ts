@@ -325,8 +325,9 @@ export class EventService {
         .pipe(catchError(this.handleError<IEvent[]>('get events', [])));
     }
 
-    getEventByID(id: number): IEvent {
-        return EVENTS.find(e => e.id === id);
+    getEventByID(id: number): Observable<IEvent> {
+        return this.http.get<IEvent>('/api/events/' + id)
+        .pipe(catchError(this.handleError<IEvent>('get events')));
     }
 
     addEvent(event) {
