@@ -336,23 +336,9 @@ export class EventService {
         .pipe(catchError(this.handleError<IEvent>('add/update event')));
     }
 
-    searchSessions(searchTerm: string) {
-        searchTerm = searchTerm.toLocaleLowerCase();
-        let results: ISession[] = [];
-
-        EVENTS.forEach(e => {
-            const matchingSessions = e.sessions.filter(s => s.name.toLocaleLowerCase().indexOf(searchTerm) > -1);
-            matchingSessions.forEach((s: any) => s.eventId = e.id);
-            results = results.concat(matchingSessions);
-        });
-
-        const req = new EventEmitter(true);
-
-        setTimeout(() => {
-            req.emit(results);
-        }, 100);
-
-        return req;
+    searchSessions(searchTerm: string): Observable<ISession[]> {
+        return this.http.get<ISession[]>('/api/sessions/search?search=' + searchTerm)
+        .pipe(catchError(this.handleError<ISession[]>('search event')));
     }
 
     private handleError<T> (operation='operation', result?: T) {
