@@ -332,7 +332,7 @@ export class EventService {
 
     saveEvent(event) {
         const options = { headers: new HttpHeaders({'Content-Type': 'application/json'}) };
-        return this.http.post('/api/events', event, options)
+        return this.http.post<IEvent>('/api/events', event, options)
         .pipe(catchError(this.handleError<IEvent>('add/update event')));
     }
 
