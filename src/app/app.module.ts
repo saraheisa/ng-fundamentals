@@ -18,7 +18,8 @@ import {
   DurationPipe,
   VoteComponent,
   LocationValidatorDirective,
-  EventResolverService
+  EventResolverService,
+  VotingService
 } from './events/index';
 
 import { AppComponent } from './app.component';
@@ -71,6 +72,7 @@ const jQuery = window['$'];
     EventListResolverService,
     AuthService,
     EventResolverService,
+    VotingService,
     {
       provide: 'canDeactivateCreateEvent',
       useValue: isCreateEventDirty
