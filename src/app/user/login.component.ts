@@ -12,12 +12,19 @@ import { AuthService } from './auth.service';
 export class LoginComponent {
     userName;
     password;
+    loginError = false;
 
     constructor(private router: Router, private authService: AuthService) {}
 
     login(values) {
-        this.authService.loginUser(values.userName, values.password);
-        this.router.navigate(['events']);
+        this.authService.loginUser(values.userName, values.password).subscribe( res => {
+            if (res) {
+                this.loginError = false;
+                this.router.navigate(['events']);
+            } else {
+                this.loginError = true;
+            }
+        });
     }
 
     cancel() {
