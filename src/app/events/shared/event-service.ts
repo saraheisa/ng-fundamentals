@@ -327,7 +327,7 @@ export class EventService {
 
     getEventByID(id: number): Observable<IEvent> {
         return this.http.get<IEvent>('/api/events/' + id)
-        .pipe(catchError(this.handleError<IEvent>('get events')));
+        .pipe(catchError(this.handleError<IEvent>('get event')));
     }
 
     addEvent(event) {
