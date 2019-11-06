@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../user/auth.service';
-import { ISession, EventService } from '../events';
+import { ISession, EventService, IEvent } from '../events';
 
 
 @Component({
@@ -14,13 +14,19 @@ import { ISession, EventService } from '../events';
     `]
 })
 
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
 
     searchTerm = '';
     foundSessions: object[];
+    events: IEvent[];
 
     constructor(private authService: AuthService, private eventService: EventService) {}
 
+    ngOnInit(): void {
+        this.eventService.getEvents().subscribe(res => {
+            this.events = res;
+        });
+    }
     searchSessions(searchTerm: string) {
         this.eventService.searchSessions(searchTerm).subscribe(sessions => {
             this.foundSessions = sessions;
