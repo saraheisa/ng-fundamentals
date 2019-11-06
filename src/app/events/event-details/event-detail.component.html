@@ -14,11 +14,14 @@
       <div><strong>Price:</strong> {{event?.price | currency: USD}}</div>
     </div>
     <div class="col-md-6">
-      <address>
+      <address *ngIf="event?.location">
         <strong>Address:</strong><br />
         {{event?.location?.address}}<br />
         {{event?.location?.city}}, {{event?.location?.country}}
       </address>
+      <div *ngIf="event?.onlineUrl">
+        <a href="{{event.onlineUrl}}"><strong>Online Link</strong></a>
+      </div>
     </div>
   </div>
 
