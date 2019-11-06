@@ -22,10 +22,11 @@ export class CreateEventComponent {
     constructor ( private router: Router, private eventService: EventService ) {}
 
     saveEvent(formData) {
-        this.eventService.addEvent(formData);
-        this.isDirty = false;
-        console.log(formData);
-        this.router.navigate(['events']);
+        this.eventService.saveEvent(formData).subscribe(res => {
+            this.isDirty = false;
+            console.log(formData);
+            this.router.navigate(['events']);
+        });
     }
 
     cancel() {
